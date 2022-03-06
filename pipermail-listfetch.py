@@ -7,7 +7,6 @@ import bs4 as bs
 import requests
 import argparse
 import os
-#import gzip
 from time import sleep
 from urllib.parse import urlparse
 
