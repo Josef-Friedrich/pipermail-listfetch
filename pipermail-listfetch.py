@@ -15,10 +15,10 @@ parser = argparse.ArgumentParser(description="Fetch mailing list archives.",
     epilog="MIT license. (C) 2022 Alinur.\nFull license text in LICENSE file.")
 parser.add_argument("webpage",
     help="Pipermail webpage to parse and fetch mailing list archives from.")
-parser.add_argument("--wait", type=float, metavar="s", default=2.5,
+parser.add_argument("--wait", type=float, metavar="s", default=1.5,
     help="Interval between downloading each mailing list archive (in seconds)" +
          "\nThis setting is for preventing overloading the server\n" +
-         "or triggering website rate limits. Default is 2.5.")
+         "or triggering website rate limits. Default is 1.5.")
 
 args = parser.parse_args()
 interval = args.wait
