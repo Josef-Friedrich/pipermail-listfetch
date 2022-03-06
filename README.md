@@ -13,6 +13,13 @@ You can install the needed libraries with pip3:
 pip3 install -r requirements.txt
 ```
 
+## Usage
+*(arguments in [ ] are not required)*
+```
+./pipermail-listfetch.py mailing-list [--wait 1.5]
+```
+Example: `./pipermail-listfetch.py http://lists.dillo.org/pipermail/dillo-dev/ --wait 2.0`
+
 ## What's pipermail?
 Pipermail is the default web archive interface for GNU Mailman, a mailing list 
 software. With it, you can browse a mailing list with just your web browser.
