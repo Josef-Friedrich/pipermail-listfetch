@@ -8,6 +8,11 @@
 - LXML
 - Requests
 
+You can install the needed libraries with pip3:
+```
+pip3 install -r requirements.txt
+```
+
 ## What's pipermail?
 Pipermail is the default web archive interface for GNU Mailman, a mailing list 
 software. With it, you can browse a mailing list with just your web browser.
