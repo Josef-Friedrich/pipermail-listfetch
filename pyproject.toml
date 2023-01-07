@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "pipermail_listfetch"
+version = "0.1.0"
+license = "MIT"
+description = "is a Python script for downloading mailing list archives off pipermail."
+authors = ["Alinur"]
+classifiers = [
+    "Private :: Do not Upload",
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+beautifulsoup4 = "4.10.0"
+requests = "2.27.1"
+lxml = "4.8.0"
+
+[build-system]
+requires = ["poetry>=1.2.0b2"]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry.scripts]
+"pipermail-listfetch.py" = "pipermail_listfetch:main"
