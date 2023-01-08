@@ -35,7 +35,7 @@ def main():
     interval = args.wait
 
     ### Webpage parsing ###
-    page = requests.get(args.webpage).text
+    page: str = requests.get(args.webpage).text
     soup = bs.BeautifulSoup(page, "lxml")
 
     all_links = []
@@ -56,6 +56,7 @@ def main():
     )
     for archive in archive_links:
         ## Retrieve filename
+        ## 2023-January.tex
         file_name = os.path.basename(urlparse(archive).path)
 
         for mount, number in {
@@ -72,15 +73,30 @@ def main():
             "November": "11",
             "December": "12",
         }.items():
-            file_name = file_name.replace(mount, number)
+            file_name: str = file_name.replace(mount, number)
+
+        # 2022
+        year: str = file_name[:4]
+
+        # 12.txt
+        file_name = file_name[5:]
+
+        # 12.mbox
+        file_name = file_name.replace('.txt', '.mbox')
+        try:
+            os.mkdir(year)
+        except:
+            pass
+
+        rel_path: str = os.path.join(year, file_name)
 
         ## Download archive
-        archived_mail = requests.get(args.webpage + archive).text
+        archived_mail: str = requests.get(args.webpage + archive).text
 
         final_text = archived_mail
 
         ## Save archive
-        with open(file_name, "w") as archive_file:
+        with open(rel_path, "w") as archive_file:
             archive_file.write(final_text)
 
         downloaded += 1
