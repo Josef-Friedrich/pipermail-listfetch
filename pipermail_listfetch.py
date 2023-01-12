@@ -3,6 +3,7 @@
 # The rest of the libraries used should be in Python3's standard library.
 
 ### Imports ###
+import re
 import bs4 as bs
 import requests
 import argparse
@@ -38,13 +39,13 @@ def main():
     page: str = requests.get(args.webpage).text
     soup = bs.BeautifulSoup(page, "lxml")
 
-    all_links = []
+    all_links: list[str] = []
     for url in soup.find_all("a"):
         all_links.append(url.get("href"))
 
-    archive_links = []
+    archive_links: list[str] = []
     for link in all_links:
-        link = link.replace(".gz", "")
+        link: str = link.replace(".gz", "")
         if link.endswith(".txt"):
             archive_links.append(link)
 
@@ -56,44 +57,47 @@ def main():
     )
     for archive in archive_links:
         ## Retrieve filename
-        ## 2023-January.tex
+        ## 2023-January.txt
         file_name = os.path.basename(urlparse(archive).path)
 
-        for mount, number in {
-            "January": "01",
-            "February": "02",
-            "March": "03",
-            "April": "04",
-            "May": "05",
-            "June": "06",
-            "July": "07",
-            "August": "08",
-            "September": "09",
-            "October": "10",
-            "November": "11",
-            "December": "12",
-        }.items():
-            file_name: str = file_name.replace(mount, number)
+        if re.match(r"\d\d\d\d-\w+\.txt", file_name):
+            for mount, number in {
+                "January": "01",
+                "February": "02",
+                "March": "03",
+                "April": "04",
+                "May": "05",
+                "June": "06",
+                "July": "07",
+                "August": "08",
+                "September": "09",
+                "October": "10",
+                "November": "11",
+                "December": "12",
+            }.items():
+                file_name: str = file_name.replace(mount, number)
 
-        # 2022
-        year: str = file_name[:4]
+            # 2022
+            year: str = file_name[:4]
 
-        # 12.txt
-        file_name = file_name[5:]
+            # 12.txt
+            file_name = file_name[5:]
 
-        # 12.mbox
-        file_name = file_name.replace('.txt', '.mbox')
-        try:
-            os.mkdir(year)
-        except:
-            pass
+            # 12.mbox
+            file_name = file_name.replace('.txt', '.mbox')
+            try:
+                os.mkdir(year)
+            except:
+                pass
+            rel_path: str = os.path.join(year, file_name)
+        else:
+            rel_path = file_name
 
-        rel_path: str = os.path.join(year, file_name)
 
         ## Download archive
         archived_mail: str = requests.get(args.webpage + archive).text
 
-        final_text = archived_mail
+        final_text: str = archived_mail
 
         ## Save archive
         with open(rel_path, "w") as archive_file:
