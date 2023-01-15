@@ -26,10 +26,10 @@ def main():
         "--wait",
         type=float,
         metavar="s",
-        default=1.5,
+        default=0.2,
         help="Interval between downloading each mailing list archive (in seconds)"
         + "\nThis setting is for preventing overloading the server\n"
-        + "or triggering website rate limits. Default is 1.5.",
+        + "or triggering website rate limits. Default is 0.2.",
     )
 
     args = parser.parse_args()
