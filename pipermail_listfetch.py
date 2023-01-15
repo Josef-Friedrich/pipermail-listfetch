@@ -83,15 +83,14 @@ def main():
             # 12.txt
             file_name = file_name[5:]
 
-            # 12.mbox
-            file_name = file_name.replace('.txt', '.mbox')
+
             try:
                 os.mkdir(year)
             except:
                 pass
-            rel_path: str = os.path.join(year, file_name)
+            dest_path: str = os.path.join(year, file_name)
         else:
-            rel_path = file_name
+            dest_path = file_name
 
 
         ## Download archive
@@ -99,8 +98,11 @@ def main():
 
         final_text: str = archived_mail
 
+        # txt -> mbox
+        dest_path = dest_path.replace('.txt', '.mbox')
+
         ## Save archive
-        with open(rel_path, "w") as archive_file:
+        with open(dest_path, "w") as archive_file:
             archive_file.write(final_text)
 
         downloaded += 1
