@@ -86,7 +86,7 @@ def main():
 
             try:
                 os.mkdir(year)
-            except:
+            except Exception:
                 pass
             dest_path: str = os.path.join(year, file_name)
         else:

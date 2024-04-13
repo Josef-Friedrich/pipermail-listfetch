@@ -16,6 +16,8 @@ lxml = "^5"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0"
+types-beautifulsoup4 = "^4"
+types-requests = "^2"
 
 [build-system]
 requires = ["poetry-core"]
